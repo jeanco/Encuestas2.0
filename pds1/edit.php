@@ -1,13 +1,3 @@
-<?php 
-	include("../seguridad/sesiones/segCapturista.php");
-	if ($_GET == null || $_GET['idEstacion']  == null || $_GET['estacion'] == null || $_GET['carretera'] == null || $_GET['km'] == null || $_GET['capturista'] == null){
-	 echo "MODO DE ACCESO INCORRECTO";
-	 header("Refresh: 2; url =  ../index.php ");
-	 exit();
-	}
-	include("../includes/Catalogo.php");
-	include("../includes/alertError.php");
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,8 +19,11 @@
 		p{margin: 0;};}
 	</style>
 </head>
-<body>	
-<?php
+<?php 
+	include("../seguridad/sesiones/segCapturista.php");
+	include("../includes/Catalogo.php");
+	include("../includes/alertError.php");
+	
 	try {
 		
 	 	$catalogo = new Catalogo();
@@ -42,17 +35,19 @@
 	}catch (Exception $e) {		
 		echo '<script type="text/javascript">$("#errorAlert").modal("show");</script>';
 	}
- ?>	
 
-	<div class="encuestas-list">		
-		<button class="btn btn-default btn-sm btn-list" id="showListToday"><span class="glyphicon glyphicon-th-list"></span> Encuestas del día</button>
-		<button class="btn btn-default btn-sm btn-clear" id="clearForm"><span class="glyphicon glyphicon-trash"></span> Limpiar datos</button>
-		<button class="btn btn-default btn-sm btn-home" id="linkHome"><span class="glyphicon glyphicon-home"></span> Pagina de inicio</button>		
+?>
+<body class="editarForm">	
+	<div class="encuestas-list">
+		<div class="list-group list">
+			<h5>Encuestas del día</h5>		  
+		</div>
 	</div>			
 		<div class="row encuestaForm">
 			<div class="col-lg-8 col-lg-offset-2 noPad">
-				<h2>Encuesta de Preferencias Declaradas - Entrevista Directa</h2>
-
+				<h1>Edición</h1>
+				<h3>Encuesta de Preferencias Declaradas - Entrevista Directa</h3>
+				<h4>Numero de referencia: <spa id="numRef"></spa></h4>
 				<div class="col-lg-12 noPad">
 
 					<div class="col-lg-3 pad2">
@@ -108,7 +103,7 @@
 						</div>
 						<div class="col-lg-2 pad2">
 							<label>Estado</label>							
-							<input class="form-control tabCtrl"  type="text" name="estadoOrigen" value="" placeholder="" required>
+							<input class="form-control tabCtrl" type="text" name="estadoOrigen" value="" placeholder="" required>
 						</div>
 						<div class="col-lg-4 pad2">
 							<label>Colonia</label>
@@ -174,11 +169,11 @@
 					</div>
 					<div class="col-lg-3 pad2">
 						<label>Carga</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="carga" value="" placeholder="" data-opt="carga" required disabled>
+						<input class="form-control tabCtrl autocomplete" type="text" name="carga" value="" placeholder="" data-opt="carga" required >
 					</div>
 					<div class="col-lg-3 pad2">
 						<label>Toneladas</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="toneladas" value="" placeholder="" data-opt="toneladas" required disabled>
+						<input class="form-control tabCtrl autocomplete" type="text" name="toneladas" value="" placeholder="" data-opt="toneladas" required >
 					</div>
 				</div>
 
@@ -232,7 +227,7 @@
 				<div class="col-lg-12 noPad">
 					
 					<div class="col-lg-2 col-lg-offset-6 pad2">
-						<button id="pdsGuardar" type="button" class="tabCtrl btn">guardar</button>
+						<button id="pdsEditar" type="button" class="tabCtrl btn">Guardar Cambios</button>
 					</div>
 				</div>
 
@@ -280,6 +275,7 @@
 		
 	</script>	
 	<script src="../js/app.js" type="text/javascript"></script>
+	<script type="text/javascript">listEncuestas.init('pds1');</script>
 
 </body>
 </html>

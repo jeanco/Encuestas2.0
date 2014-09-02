@@ -1,22 +1,12 @@
-<?php 
-	include("../seguridad/sesiones/segCapturista.php");
-	if ($_GET == null || $_GET['idEstacion']  == null || $_GET['estacion'] == null || $_GET['carretera'] == null || $_GET['km'] == null || $_GET['capturista'] == null){
-	 echo "MODO DE ACCESO INCORRECTO";
-	 header("Refresh: 2; url =  ../index.php ");
-	 exit();
-	}
-	include("../includes/Catalogo.php");
-	include("../includes/alertError.php");
-?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Semic | Preferencias</title>
+	<title>Semic | Origen y Destino</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link href="http://protodesarrollos.com/tools/img/semic_ico.ico" rel="icon" type="image/x-icon" />
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../css/jquery-ui-1.9.2.custom.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui-1.9.2.custom.min.css">
 
 	<script src="../js/jquery.min.js" type="text/javascript"></script>
 	<script src="../js/jquery-ui.min.js" type="text/javascript"></script>
@@ -26,11 +16,14 @@
 		html, body, .row{height: 100%; width: 100%;}
 		.noPad{padding: 0;}
 		.pad2{padding: 2px;}
-		p{margin: 0;};}
+		p{margin: 0;}
 	</style>
 </head>
-<body>	
-<?php
+<?php 
+	include("../seguridad/sesiones/segCapturista.php");
+	include("../includes/Catalogo.php");
+	include("../includes/alertError.php");
+	
 	try {
 		
 	 	$catalogo = new Catalogo();
@@ -42,37 +35,39 @@
 	}catch (Exception $e) {		
 		echo '<script type="text/javascript">$("#errorAlert").modal("show");</script>';
 	}
- ?>	
 
-	<div class="encuestas-list">		
-		<button class="btn btn-default btn-sm btn-list" id="showListToday"><span class="glyphicon glyphicon-th-list"></span> Encuestas del día</button>
-		<button class="btn btn-default btn-sm btn-clear" id="clearForm"><span class="glyphicon glyphicon-trash"></span> Limpiar datos</button>
-		<button class="btn btn-default btn-sm btn-home" id="linkHome"><span class="glyphicon glyphicon-home"></span> Pagina de inicio</button>		
-	</div>			
-		<div class="row encuestaForm">
+?>
+<body class="editarForm">
+		<div class="encuestas-list">
+			<div class="list-group list">
+				<h5>Encuestas del día</h5>		  
+			</div>
+		</div>
+		<div class="row encuestaForm">			
 			<div class="col-lg-8 col-lg-offset-2 noPad">
-				<h2>Encuesta de Preferencias Declaradas - Entrevista Directa</h2>
+				<h1>Edición</h1>
+				<h3>Encuesta de Origen y Destino - Entrevista Directa</h3>
+				<h4>Numero de referencia: <spa id="numRef"></spa></h4>
 
 				<div class="col-lg-12 noPad">
 
 					<div class="col-lg-3 pad2">
 						<label>Carretera</label>
-						<input class="form-control tabCtrl" type="text" name="carretera" value="" placeholder="" disabled>
+						<input class="form-control" type="text" name="carretera" value="" placeholder="" disabled>
 					</div>
 					<div class="col-lg-2 pad2">
 						<label>Estación</label>
-						<input class="form-control tabCtrl" type="text" name="estacion" value="" placeholder="" disabled>
+						<input class="form-control" type="text" name="estacion" value="" placeholder="" disabled>
 					</div>
 					<div class="col-lg-2 pad2">
 						<label>KM</label>
-						<input class="form-control tabCtrl" type="text" name="km" value="" placeholder="" disabled>
+						<input class="form-control" type="text" name="km" value="" placeholder="" disabled>
 					</div>
 
 					<div class="col-lg-1 pad2">
 						<label>Sentido</label>
 						<input class="form-control tabCtrl autocomplete" type="text" name="sentido" value="" placeholder="" data-opt = "sentido" required>
-					</div>
-					
+					</div>					
 					<div class="col-lg-1 pad2">
 						<label>Año</label>
 						<input class="form-control tabCtrl autocomplete" type="text" name="anyo" value="" placeholder="" data-opt = "anyo" required>
@@ -88,9 +83,8 @@
 					<div class="col-lg-1 pad2">
 						<label>Hora</label>
 						<input class="form-control tabCtrl autocomplete" type="text" name="hora" value="" placeholder="" data-opt = "hora" required>
-					</div>		
-
-					<div class="col-lg-3 pad2">
+					</div>					
+					<div class="col-lg-2 pad2">
 						<label>Tipo de vehículo</label>
 						<input class="form-control tabCtrl autocomplete" type="text" name="tipoVehiculo" value="" placeholder="" data-opt="tipoVehiculo" required>
 					</div>
@@ -102,21 +96,17 @@
 						<label>Origen:</label>						
 					</div>
 					<div class="col-lg-10 noPad">						
-						<div class="col-lg-4 pad2">
+						<div class="col-lg-5 pad2">
 							<label>Población</label>
 							<input class="form-control tabCtrl" type="text" name="poblacionOrigen" value="" placeholder="" required>
 						</div>
-						<div class="col-lg-2 pad2">
-							<label>Estado</label>							
-							<input class="form-control tabCtrl"  type="text" name="estadoOrigen" value="" placeholder="" required>
+						<div class="col-lg-3 pad2">
+							<label>Edo.</label>
+							<input class="form-control tabCtrl " type="text" name="estadoOrigen" value="" placeholder="" required>
 						</div>
 						<div class="col-lg-4 pad2">
 							<label>Colonia</label>
 							<input class="form-control tabCtrl autocomplete" type="text" name="coloniaOrigen" value="" placeholder="" data-opt="colonias" required>
-						</div>
-						<div class="col-lg-2 pad2">
-							<label>Frecuencia</label>
-							<input class="form-control tabCtrl autocomplete" type="text" name="frecuencia" value="" placeholder="" data-opt="frecuencia" required>
 						</div>
 					</div>
 				</div>
@@ -125,127 +115,78 @@
 					<div class="col-lg-2 pad2 labelDest">
 						<label>Destino:</label>						
 					</div>
-					<div class="col-lg-10  noPad">
-						<div class="col-lg-4 pad2">
+					<div class="col-lg-10 noPad">						
+						<div class="col-lg-5 pad2">
 							<label>Población</label>
 							<input class="form-control tabCtrl" type="text" name="poblacionDestino" value="" placeholder="" required>
 						</div>
-						<div class="col-lg-2 pad2">
-							<label>Estado</label>
-							<input class="form-control tabCtrl" type="text" name="estadoDestino" value="" placeholder="" required>
+						<div class="col-lg-3 pad2">
+							<label>Edo.</label>
+							<input class="form-control tabCtrl " type="text" name="estadoDestino" value="" placeholder="" required>
 						</div>
 						<div class="col-lg-4 pad2">
 							<label>Colonia</label>
 							<input class="form-control tabCtrl autocomplete" type="text" name="coloniaDestino" value="" placeholder="" data-opt="colonias" required>
 						</div>
-						<div class="col-lg-2 pad2">
-							<label>Ingreso mensual</label>
-							<input class="form-control tabCtrl autocomplete" type="text" name="ingreso" value="" placeholder="" data-opt="ingreso" required>
-						</div>
 					</div>
 				</div>
 
 				<div class="col-lg-12 noPad">
-					
-					
-					<div class="col-lg-3 pad2">
-						<label>Marca</label> 
+					<div class="col-lg-4 pad2">
+						<label>Marca</label>
 						<input class="form-control tabCtrl autocomplete" type="text" name="marca" value="" placeholder="" data-opt="marca" required>
 					</div>
-					<div class="col-lg-3 pad2">
+					<div class="col-lg-2 pad2">
 						<label>Año</label>
 						<input class="form-control tabCtrl autocomplete" type="text" name="modelo" value="" placeholder="" data-opt="modelo" required>
 					</div>
-				</div>	
-
-				<div class="col-lg-12 noPad">					
-					
-					<div class="col-lg-2 pad2">
+					<div class="col-lg-4 pad2">
 						<label>Combustible</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="combustible" value="" placeholder="" data-opt="combustible" required>
+						<input class="form-control tabCtrl tabCtrl autocomplete" type="text" name="combustible" value="" placeholder="" data-opt="combustible" required>
 					</div>
 					<div class="col-lg-2 pad2">
 						<label>Ocupantes</label>
 						<input class="form-control tabCtrl autocomplete" type="text" name="ocupantes" value="" placeholder="" data-opt="ocupantes" required>
-					</div>					
+					</div>
+				</div>
+
+				<div class="col-lg-12 noPad">
 					<div class="col-lg-2 pad2">
-						<label>Motivo de viaje</label>
+						<label>Motivo de Viaje</label>
 						<input class="form-control tabCtrl autocomplete" type="text" name="motivo" value="" placeholder="" data-opt="motivo" required>
 					</div>
 					<div class="col-lg-3 pad2">
-						<label>Carga</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="carga" value="" placeholder="" data-opt="carga" required disabled>
+						<label>Frecuencia del viaje</label>
+						<input class="form-control tabCtrl autocomplete" type="text" name="frecuencia" value="" placeholder="" data-opt="frecuencia" required>
 					</div>
 					<div class="col-lg-3 pad2">
-						<label>Toneladas</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="toneladas" value="" placeholder="" data-opt="toneladas" required disabled>
+						<label>Ingreso mensual</label>
+						<input class="form-control tabCtrl autocomplete" type="text" name="ingreso" value="" placeholder="" data-opt="ingreso" required>
 					</div>
-				</div>
-
-				<div class="col-lg-12 noPad">
 					<div class="col-lg-2 pad2">
-						<label>Tarjetas PD</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="tarjetasPd" value="" placeholder="" data-opt="tarjetasPd" required>						
-					</div>					
-					<div class="col-lg-1 pad2">
-						<label>T-1</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="t1" value="" placeholder="" data-opt="t1" required>
+						<label>Carga</label>
+						<input class="form-control tabCtrl autocomplete" type="text" name="carga" value="" placeholder="" data-opt="carga" required >
 					</div>
-					<div class="col-lg-1 pad2">
-						<label>T-2</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="t2" value="" placeholder="" data-opt="t2" required>
-					</div>
-					<div class="col-lg-1 pad2">
-						<label>T-3</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="t3" value="" placeholder="" data-opt="t3" required>
-					</div>
-					<div class="col-lg-1 pad2">
-						<label>T-4</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="t4" value="" placeholder="" data-opt="t4" required>
-					</div>
-					<div class="col-lg-1 pad2">
-						<label>T-5</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="t5" value="" placeholder="" data-opt="t5" required>
-					</div>
-					<div class="col-lg-1 pad2">
-						<label>T-6</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="t6" value="" placeholder="" data-opt="t6" required>
-					</div>
-					<div class="col-lg-1 pad2">
-						<label>T-7</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="t7" value="" placeholder="" data-opt="t7" required>
-					</div>
-					<div class="col-lg-1 pad2">
-						<label>T-8</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="t8" value="" placeholder="" data-opt="t8" required>
-					</div>
-					<div class="col-lg-1 pad2">
-						<label>T-9</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="t9" value="" placeholder="" data-opt="t9" required>
-					</div>
-					<div class="col-lg-1 pad2">
-						<label>T-10</label>
-						<input class="form-control tabCtrl autocomplete" type="text" name="t10" value="" placeholder="" data-opt="t10" required>
+					<div class="col-lg-2 pad2">
+						<label>Tonelada</label>
+						<input class="form-control tabCtrl autocomplete" type="text" name="toneladas" value="" placeholder="" data-opt="toneladas" required >
 					</div>
 				</div>
 
 				<div class="col-lg-12 noPad">
-					
 					<div class="col-lg-2 col-lg-offset-6 pad2">
-						<button id="pdsGuardar" type="button" class="tabCtrl btn">guardar</button>
+						<button id="odsEditar" type="button" class="btn tabCtrl">Guardar Cambios</button>
 					</div>
 				</div>
 
 			</div>
-		</div>		
-	<script type="text/javascript">		
-		
-		
-		var	colonias = <?php echo $colonias?>,
+		</div>
+	<script type="text/javascript">
+		var colonias = <?php echo $colonias?>,
 			poblaciones = <?php echo $ciudades?>,
-			marcas = <?php echo $marcas?>,	
-			cargas = <?php echo $cargas?>; 	
-
+			marcas = <?php echo $marcas?>,			
+			cargas = <?php echo $cargas?>; 
+			
 		var catalogos = {
     	sentido : [{value: "0",label: "NoCapturado"},{value: "1",label: "1"},{value: "2",label: "2"}],
 		anyo : [{value: "0",label: "NoCapturado"},{value: "14", label: "2014" },{value: "15", label: "2015" },{value: "16", label: "2016" }],
@@ -253,8 +194,7 @@
 		carril : [{value: "0",label: "NoCapturado"},{value: "1",label: "1"},{value: "2",label: "2"}],
 		dia : [{value: "0",label: "NoCapturado"},{ value: "1", label: "1"},{ value: "2", label: "2"},{ value: "3", label: "3"},{ value: "4", label: "4"},{ value: "5", label: "5"},{ value: "6", label: "6"},{ value: "7", label: "7"},{ value: "8", label: "8"},{ value: "9", label: "9"},{ value: "10", label: "10"},{ value: "11", label: "11"},{ value: "12", label: "12"},{ value: "13", label: "13"},{ value: "14", label: "14"},{ value: "15", label: "15"},{ value: "16", label: "16"},{ value: "17", label: "17"},{ value: "18", label: "18"},{ value: "19", label: "19"},{ value: "20", label: "20"},{ value: "21", label: "21"},{ value: "22", label: "22"},{ value: "23", label: "23"},{ value: "24", label: "24"},{ value: "25", label: "25"},{ value: "26", label: "26"},{ value: "27", label: "27"},{ value: "28", label: "28"},{ value: "29", label: "29"},{ value: "30", label: "30"},{ value: "31", label: "31"}],
 		hora : [{value: "0",label: "0"},{ value: "1", label: "1"},{ value: "2", label: "2"},{ value: "3", label: "3"},{ value: "4", label: "4"},{ value: "5", label: "5"},{ value: "6", label: "6"},{ value: "7", label: "7"},{ value: "8", label: "8"},{ value: "9", label: "9"},{ value: "10", label: "10"},{ value: "11", label: "11"},{ value: "12", label: "12"},{ value: "13", label: "13"},{ value: "14", label: "14"},{ value: "15", label: "15"},{ value: "16", label: "16"},{ value: "17", label: "17"},{ value: "18", label: "18"},{ value: "19", label: "19"},{ value: "20", label: "20"},{ value: "21", label: "21"},{ value: "22", label: "22"},{ value: "23", label: "23"}],
-		//tipoVehiculo:[{value:"0",label:"NoCapturado"},{value:"A",label:"A"},{value:"P",label:"P"},{value:"U",label:"U"},{value:"B",label:"B"},{value:"C2",label:"C2"},{value:"C3",label:"C3"},{value:"C5",label:"C5"},{value:"C6",label:"C6"},{value:"C7",label:"C7"},{value:"C8",label:"C8"},{value:"C9",label:"C9"}],
-		tipoVehiculo:[{value:"0",label:"NoCapturado"},{value:"A",label:"Automovil"},{value:"P",label:"Pickup"},{value:"U",label:"Utilitario"},{value:"B",label:"Bus"},{value:"C2",label:"Camion de dos ejes"},{value:"C3",label:"Camion de tres ejes"},{value:"C5",label:"Camion de cinco ejes"},{value:"C6",label:"Camion de seis ejes"},{value:"C7",label:"Camion de siete ejes"},{value:"C8",label:"Camion de ocho ejes"},{value:"C9",label:"Camion de nueve ejes"}],
+		tipoVehiculo : [{value: "0",label: "NoCapturado"},{ value: "A", label: "Automovil"},{ value: "P", label: "Pickup"},{ value: "U", label: "Utilitario"},{ value: "B", label: "B"},{ value: "C2", label: "Camion de dos ejes"},{ value: "C3", label: "Camion de tres ejes"},{ value: "C4", label: "Camion de cuatro ejes"},{ value: "C5", label: "Camion de cinco ejes"},{ value: "C6", label: "Camion de seis ejes"},{ value: "C7", label: "Camion de siete ejes"},{ value: "C8", label: "Camion de ocho ejes"},{ value: "C9", label: "Camion T2-S1"},{ value: "C10", label: "Camion T2-S2"},{ value: "C11", label: "Camion T3-S2"},{ value: "C12", label: "Camion T3-S3"},{ value: "C13", label: "Camion T2-S1-R2"},{ value: "C14", label: "Camion T3-S1-R2"},{ value: "C15", label: "Camion T3-S2-R2"},{ value: "C16", label: "Camion T3-S2-R3"},{ value: "C17", label: "Camion T3-S3-S2"},{ value: "C18", label: "Camion T3-S2-R4"},{ value: "C19", label: "Camion C2-R2"},{ value: "C20", label: "Camion C2-R3"},{ value: "C21", label: "Camion C3-R2"},{ value: "C22", label: "Camion C3-R3"},{ value: "C23", label: "Otros"}],
 		frecuencia : [{value: "0",label: "NoCapturado"},{value: "D",label: "Diaria"},{value: "S",label: "Semanal"},{value: "M",label: "Mensual"},{value: "E",label: "Eventual"}],
 		ingreso : [{value: "0",label: "NoCapturado"},{value: "1",label: "0 - 5000"},{value: "2",label: "5001 - 10000"},{value: "3",label: "10001 - 20000"},{value: "4",label: ">20000"}],
 		marca : marcas,
@@ -279,7 +219,34 @@
     };	
 		
 	</script>	
+	
 	<script src="../js/app.js" type="text/javascript"></script>
+	<script type="text/javascript">listEncuestas.init('ods1');</script>
+	<script>
+		var pdEntrevistaDirecta = {
+			tabReturn : $('[name="hora"]'),
+			btnGuardar : $("#btnGuardar"),
+			setEvents : function(){
+				var _this = this;
+				//boton guardar
+			    // keyup
+			    $(this.btnGuardar).on("keypress",function(){
+			    	_this.tabReturn.focus();
+			    });
+			    $(this.btnGuardar).on("keydown",function(e){
+					var keyCode = e.keyCode || e.which; 
+					if (keyCode == 9) { 
+    					e.preventDefault(); 
+    					_this.tabReturn.focus();
+    				}			    	
+			    });
+			},
+			init: function(){
 
+				this.setEvents();
+			}
+		};
+		pdEntrevistaDirecta.init();
+	</script>
 </body>
 </html>
