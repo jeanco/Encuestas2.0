@@ -2,10 +2,8 @@
 class ConexionMongodb 
 {			
 		protected $conexion;
-		const DB='devencuestas';
-		const SERVER='mongodb://JAYROSERVER-PC:27017';
-	//	const DB='encuestas';
-	//	const SERVER='mongodb://ENCUESTAS:27017';		
+		const DB='encuestas';
+		const SERVER='mongodb://ENCUESTAS:27017';		
 		protected $db;
 
 		function __construct() 
