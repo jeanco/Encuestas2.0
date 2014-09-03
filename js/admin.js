@@ -5,26 +5,24 @@
                     });
                   });
 
-               $('#usuarios').submit(function (event) {
+               $('#usuarios').on( "submit", function() {
                   event.preventDefault();
                   var encuesta, capturista;
                   encuesta = $( "input:radio[name=encuestasCap]:checked" ).val();
                   capturista = $( "#capturista option:selected" ).val();
-                  console.log(capturista);
                   $('#modalUsuarios').modal("toggle");
                   $('#bodyUsuarios').load('../excel/visorRepUsuario.php?capturista='+capturista+'&rubro='+encuesta);
                })
 
 
-               $('#formPaquetes').submit(function (event) {
+               $('#formPaquetes').on( "submit", function() {
                   event.preventDefault();
                   var encuesta, paquetes;
                   encuesta  = $( "input:radio[name=encuestasEst]:checked" ).val();
                   idEstacion = $( "#paquetes option:selected" ).val();
                   estacion = $("#paquetes option:selected").data('estacion');
-                 // console.log(estacion);
                   $('#modalPaquetes').modal("toggle");
-                  $('#bodyPaquetes').load('../excel/visorRepPaquetes.php?idEstacion='+idEstacion+'&rubro=66565465'+encuesta+'&estacion='+estacion);
+                  $('#bodyPaquetes').load('../excel/visorRepPaquetes.php?idEstacion='+idEstacion+'&rubro='+encuesta+'&estacion='+estacion);              
                })
 
 
