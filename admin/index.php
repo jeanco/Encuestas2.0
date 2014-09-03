@@ -1,5 +1,5 @@
 <?php
-include('../seguridad/sesiones/segAdministrador.php');
+//include('../seguridad/sesiones/segAdministrador.php');
 include('../includes/admin.php');
 //session_start();
 $client = new Admin();

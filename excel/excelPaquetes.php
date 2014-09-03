@@ -4,6 +4,7 @@
  set_time_limit(20*60);
 
  $consulta = array('idEstacion'=>$_GET['idEstacion'], "rubro"=>$_GET['rubro']);
+
  $skip = (int)$_GET['skip'];
  $limit =(int)$_GET['limit'];
 
@@ -12,6 +13,7 @@
  include('reportes.php');
 
  $client = new Reporte();
+ $nombreEstacion =  $client->getEstacion($_GET['idEstacion']);
 
  /** Error reporting */
  error_reporting(E_ALL);
@@ -218,10 +220,10 @@ if ($_GET['rubro'] === 'pds1') {
 					);		
 
 
-	$objPHPExcel->getActiveSheet()->getStyle('A1:AU1')->applyFromArray($decoracionTitulos);
+	$objPHPExcel->getActiveSheet()->getStyle('A1:AT1')->applyFromArray($decoracionTitulos);
 
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-	header('Content-Disposition: attachment;filename="'.$_GET['estacion'].'-PD.xlsx"');
+	header('Content-Disposition: attachment;filename="'.$nombreEstacion['estacion'].'-PD.xlsx"');
 	header('Cache-Control: max-age=0');
 
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
@@ -389,7 +391,7 @@ if ($_GET['rubro'] === 'pds1') {
 	$objPHPExcel->getActiveSheet()->getStyle('A1:AI1')->applyFromArray($decoracionTitulos);
 
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-	header('Content-Disposition: attachment;filename="'.$_GET['estacion'].'-ODS.xlsx"');
+	header('Content-Disposition: attachment;filename="'.$nombreEstacion['estacion'].'-ODS.xlsx"');
 	header('Cache-Control: max-age=0');
 
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');

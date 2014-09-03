@@ -4,6 +4,7 @@
  //var_dump($_GET);
  $paquete = $_GET;
  $count = $client->countEncuestas($_GET);
+ //var_dump($count);
  if ($count == 0 || $count == null) {
  ?>
 	<p><span> <span class="glyphicon glyphicon-warning-sign" style="font-size:16px;"></span>   Aún no existen registros para generar descargar. </span></p>
@@ -46,10 +47,10 @@
 	for (var i = 0; i<reportes.length; i++) {
 		var tr = $('<tr><td>'+(i+1)+'</td><td>Reporte (parte-'+(i+1)+')</td></tr>');
 		var td = $('<td></td>');
-		var button = $('<button  data-idestacion="'+idEstacion+'" data-rubro="'+rubro+'" data-skip="'+reportes[i].skip+'" data-limit="'+reportes[i].limit+'" data-estacion="'+estacion+'" class="btn btn-success">Descargar <span class="glyphicon glyphicon-download" ></span></button>');	
+		var button = $('<button  data-idestacion="'+idEstacion+'" data-rubro="'+rubro+'" data-skip="'+reportes[i].skip+'" data-limit="'+reportes[i].limit+'"  class="btn btn-success">Descargar <span class="glyphicon glyphicon-download" ></span></button>');	
 		$( button ).on( "click", function() {
 			event.preventDefault();
-	        window.open("../excel/excelPaquetes.php?idEstacion="+ $( this ).data('idestacion') +"&rubro="+$( this ).data('rubro') +"&skip="+$( this ).data('skip') +"&limit="+$( this ).data('limit') +"&estacion="+$( this ).data('estacion') , "_blank");          
+	        window.open("../excel/excelPaquetes.php?idEstacion="+ $( this ).data('idestacion') +"&rubro="+$( this ).data('rubro') +"&skip="+$( this ).data('skip') +"&limit="+$( this ).data('limit') , "_blank");          
 		});
 		tr.append(td);
 		td.append(button);

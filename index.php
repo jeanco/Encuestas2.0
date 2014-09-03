@@ -85,7 +85,7 @@
 					<div id="divPaquetes" class="col-lg-7 well">
 						<p>Para seleccionar una estacion clic sobre ella&nbsp;<i class="glyphicon glyphicon-hand-down"></i></p>
 						<div id="paquetesLista" class="col-lg-12">
-							<table class="table table-condensed table-hover">
+							<table class="table table-condensed table-hover" id="mapPaquetes">
 								<tr> <th>Carretera</th> <th>Estacion</th> <th>KM</th> </tr>
 								<tbody>
 									<?php 

@@ -72,7 +72,7 @@
      margin-top: 25px;
 }
 
-td{
+#mapPaquetes tbody td{
   cursor: pointer;
 }
 

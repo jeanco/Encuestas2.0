@@ -29,6 +29,12 @@ class Reporte extends Admin
         return $this->db->encuesta->count($usuario);
     }
 
+    function getEstacion($id)
+    {   
+        return $this->db->paquetes->findOne(array('_id' => new MongoId($id)), array('estacion'));
+    }
+
+
 }
 
 ?>

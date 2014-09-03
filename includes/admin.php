@@ -258,7 +258,7 @@ class Admin extends ConexionMongodb
 	function mapListaPaquetes()
 	{
 		$opciones = array_map(function($paquete){			
-         		      return "<option value='".$paquete['_id']."' data-estacion='".$paquete['estacion']."' >".$paquete['estacion']."</option>";   
+         		      return "<option value='".$paquete['_id']."' >".$paquete['estacion']."</option>";   
             		}, 
             		$this->listaPaquetes());
 		return implode($opciones);

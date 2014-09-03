@@ -11,7 +11,9 @@
                   encuesta = $( "input:radio[name=encuestasCap]:checked" ).val();
                   capturista = $( "#capturista option:selected" ).val();
                   $('#modalUsuarios').modal("toggle");
-                  $('#bodyUsuarios').load('../excel/visorRepUsuario.php?capturista='+capturista+'&rubro='+encuesta);
+                  $.get('../excel/visorRepUsuario.php?capturista='+capturista+'&rubro='+encuesta, function(data) {
+                    $('#bodyUsuarios').html(data);
+                  });
                })
 
 
@@ -20,9 +22,10 @@
                   var encuesta, paquetes;
                   encuesta  = $( "input:radio[name=encuestasEst]:checked" ).val();
                   idEstacion = $( "#paquetes option:selected" ).val();
-                  estacion = $("#paquetes option:selected").data('estacion');
                   $('#modalPaquetes').modal("toggle");
-                  $('#bodyPaquetes').load('../excel/visorRepPaquetes.php?idEstacion='+idEstacion+'&rubro='+encuesta+'&estacion='+estacion);              
+                  $.get('../excel/visorRepPaquetes.php?idEstacion='+idEstacion+'&rubro='+encuesta, function(data) {
+                     $('#bodyPaquetes').html(data);              
+                  });
                })
 
 
