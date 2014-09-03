@@ -258,13 +258,13 @@ class Admin extends ConexionMongodb
 	function mapListaPaquetes()
 	{
 		$opciones = array_map(function($paquete){			
-         		      return "<option value='".$paquete['_id']."'>".$paquete['estacion']."</option>";   
+         		      return "<option value='".$paquete['_id']."' data-estacion='".$paquete['estacion']."' >".$paquete['estacion']."</option>";   
             		}, 
             		$this->listaPaquetes());
 		return implode($opciones);
 	}
 
-
+/*
 	function mapListaPaquetesId()
 	{
 		$lista = array_map(function($paquete){			
@@ -274,33 +274,17 @@ class Admin extends ConexionMongodb
 		return implode($lista);
 	}
 
-
+*/
 	/****** capturistas ********/
 
 	function mapListaCapturistas()
 	{
 		$opciones = array_map(function($capturista){
-
-					$id_json=$capturista['_id'];
-					$id_json=(explode('$id', $id_json));
-
-					$json = array('id_usuario'=>$id_json[0],'nombre'=>$capturista['nombre']);
-						
-						$json = json_encode($json);
-
-						return "<option value='".$json."'>".$capturista['nombre']."</option>";
+						return "<option value='".$capturista['nombre']."'>".$capturista['nombre']." ".$capturista['apellidos']."</option>";
 				   },
 				   $this->listaCapturistas());
 		return implode($opciones);
 	}
-
-
-
-
-
-
-
-
 
 
 	/*********************/

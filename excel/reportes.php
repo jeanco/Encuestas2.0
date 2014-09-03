@@ -19,42 +19,16 @@ class Reporte extends Admin
         
     }
 
-
     function countEncuestas($estacion)
     {
     	return $this->db->encuesta->count($estacion);
     }
 	
-	
-	/****** Paquetes *******
-    function countPaquete()
+    function countEncUsuario($usuario)
     {
-    	return $this->db->encuesta->
+        return $this->db->encuesta->count($usuario);
     }
-*/
-/*
-	function excelPaquetes($paquete)
-    {*/
-   // 	return $this->db->encuesta->find($paquete)/*->skip(18000)->limit(9000)*/;
- /*   	
-    }
-*/
 
-	/****** capturistas ********/
-
-/*
-	function ultCapturistas()
-	{
-		return $this->db->usuario->find()->sort(array("id_usuario"=>-1));
-	}
-
-	function excelCapturista($consulta)
-	{
-		return $this->db->ods2_mayo_14->find($consulta);
-	}
-
-
-*/
 }
 
 ?>

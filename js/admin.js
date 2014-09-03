@@ -4,29 +4,27 @@
                       return val.toUpperCase();
                     });
                   });
-/*
+
                $('#usuarios').submit(function (event) {
                   event.preventDefault();
                   var encuesta, capturista;
                   encuesta = $( "input:radio[name=encuestasCap]:checked" ).val();
                   capturista = $( "#capturista option:selected" ).val();
+                  console.log(capturista);
+                  $('#modalUsuarios').modal("toggle");
+                  $('#bodyUsuarios').load('../excel/visorRepUsuario.php?capturista='+capturista+'&rubro='+encuesta);
+               })
 
-                    if( encuesta == "preferencias"){
-                      window.open("../excel/excelUPre.php?capturista=" + capturista, "_blank");
-                    }else if( encuesta == "ods"){       
-                      window.open("../excel/excelUOds.php?capturista=" + capturista, "_blank");          
-                    }
-                    
-               });
 
-*/
                $('#formPaquetes').submit(function (event) {
                   event.preventDefault();
                   var encuesta, paquetes;
                   encuesta  = $( "input:radio[name=encuestasEst]:checked" ).val();
-                  paquetes = $( "#paquetes option:selected" ).val();
+                  idEstacion = $( "#paquetes option:selected" ).val();
+                  estacion = $("#paquetes option:selected").data('estacion');
+                 // console.log(estacion);
                   $('#modalPaquetes').modal("toggle");
-                  $('#bodyPaquetes').load('../excel/visorReportes.php?idEstacion='+paquetes+'&rubro='+encuesta);
+                  $('#bodyPaquetes').load('../excel/visorRepPaquetes.php?idEstacion='+idEstacion+'&rubro=66565465'+encuesta+'&estacion='+estacion);
                })
 
 

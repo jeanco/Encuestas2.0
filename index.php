@@ -70,7 +70,7 @@
 								<div class="form-group">
 								    <div class="input-group">
 								      	<div class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></div>
-								      	<input class="form-control" type="password" placeholder="Escribe tu password" name="contra" required>
+								      	<input class="form-control" type="password" placeholder="Escribe tu password" id="contra" name="contra" required>
 								    </div>
 								</div>
 							</div>
@@ -112,7 +112,7 @@
 								<div class="form-group">
 								    <div class="input-group">
 								      	<div class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></div>
-								      	<input class="form-control" type="password" name="contra" placeholder="Escribe tu password" required>
+								      	<input class="form-control" type="password" id="contra" name="contra" placeholder="Escribe tu password" required>
 								    	<input type="hidden" name="encuestas" value="admin">
 								    </div>
 								</div>
@@ -130,7 +130,7 @@
 		</div>
 	</div>
 
-	<script src="http://www.protodesarrollos.com/tools/cdn/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 	<script>
 		$('tr').click(function(event) {
@@ -140,6 +140,14 @@
 			$('#carretera').val(paquete.carretera);			
 			$('#km').val(paquete.km);
 		});
+
+         $('input').on('input', function(evt) { // script para que todos los input text sean mayus
+               $(this).not('#contra').val(function (_, val) {
+                 return val.toUpperCase();
+               });
+             });
+
+
 	</script>
 </body>
 </html>

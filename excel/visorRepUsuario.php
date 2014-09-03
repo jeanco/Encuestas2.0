@@ -1,8 +1,8 @@
 <?php
  include('reportes.php');
  $client = new Reporte();
- $paquete = $_GET;
- $count = $client->countEncuestas($_GET);
+ $usuario = $_GET;
+ $count = $client->countEncUsuario($_GET);
 // $count =8001;
  if ($count == 0 || $count == null) {
  ?>
@@ -25,8 +25,8 @@
 </div>
 <script>
 	var totalRegistros = parseInt("<?php echo $count; ?>"); // convertir en int
-	var idEstacion = "<?php echo $paquete['idEstacion']; ?>";
-	var rubro = "<?php echo $paquete['rubro']; ?>";
+	var capturista = "<?php echo $usuario['capturista']; ?>";
+	var rubro = "<?php echo $usuario['rubro']; ?>";
 	var reportes=[];
 	var vuelta = 0;
 
@@ -42,22 +42,23 @@
 	vuelta++;
 	}
 
-	// console.log(reportes);
-	var table = $('#reportes');
+		var table = $('#reportes');
+		for (var i = 0; i<reportes.length; i++) {
+			var tr = $('<tr><td>'+(i+1)+'</td><td>Reporte (parte-'+(i+1)+')</td></tr>');
+			var td = $('<td></td>');
+			var button = $('<button  data-capturista="'+capturista+'" data-rubro="'+rubro+'" data-skip="'+reportes[i].skip+'" data-limit="'+reportes[i].limit+'" class="btn btn-success">Descargar <span class="glyphicon glyphicon-download" ></span></button>');	
+			$( button ).on( "click", function() {
+				event.preventDefault();
+			  //	alert( $( this ).data('idestacion') );
+		        window.open("../excel/excelUsuario.php?capturista="+ $( this ).data('capturista') +"&rubro="+$( this ).data('rubro') +"&skip="+$( this ).data('skip') +"&limit="+$( this ).data('limit') , "_blank");          
+			});
+			tr.append(td);
+			td.append(button);
+			table.append(tr);
+		};
 
-	for (var i = 0; i<reportes.length; i++) {
-		var tr = $('<tr><td>'+(i+1)+'</td><td>Reporte (parte-'+(i+1)+')</td></tr>');
-		var td = $('<td></td>');
-		var button = $('<button  data-idestacion="'+idEstacion+'" data-rubro="'+rubro+'" data-skip="'+reportes[i].skip+'" data-limit="'+reportes[i].limit+'" class="btn btn-success">Descargar <span class="glyphicon glyphicon-download" ></span></button>');	
-		$( button ).on( "click", function() {
-			event.preventDefault();
-		  //	alert( $( this ).data('idestacion') );
-	        window.open("../excel/excelPaquetesPD.php?idEstacion="+ $( this ).data('idestacion') +"&rubro="+$( this ).data('rubro') +"&skip="+$( this ).data('skip') +"&limit="+$( this ).data('limit') , "_blank");          
-		});
-		tr.append(td);
-		td.append(button);
-		table.append(tr);
-	};
+	// console.log(reportes);
+
 </script>
 <?php
 }

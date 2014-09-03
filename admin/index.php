@@ -333,7 +333,7 @@ $client = new Admin();
     </div><!-- /row -->
   </div>
 
-  <div id="modalPaquetes" class="modal fade"><!-- /.modal paquetes-->
+  <div id="modalPaquetes" class="modal fade"><!-- /.modal reporte paquetes-->
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -350,6 +350,22 @@ $client = new Admin();
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
+  <div id="modalUsuarios" class="modal fade"><!-- /.modal reporte capturista-->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Reportes Resultantes</h4>
+        </div>
+        <div id="bodyUsuarios" class="modal-body">
+          <p>Espere un momento...</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
      <script type="text/javascript" src="../js/admin.js"> </script>
  </body>

@@ -5,7 +5,6 @@
 <html>
 <head>
 	<title></title>
-	 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
      <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">      
      <style type="text/css">
      td{
@@ -37,7 +36,7 @@
 		
 	</div>
 </div>
-
+ <script src="../js/jquery.min.js"></script>
 <script type="text/javascript">
 var tiempoIntervalo = (20*1000);
 // generar tabla de monitoreo
