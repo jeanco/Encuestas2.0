@@ -1,5 +1,5 @@
 
-              $('input').on('input', function(evt) { // script para que todos los input text sean mayus
+              $('input').on('input', function(evt) { 
                     $(this).not('#contrasenya').val(function (_, val) {
                       return val.toUpperCase();
                     });
