@@ -3,7 +3,9 @@ class ConexionMongodb
 {			
 		protected $conexion;
 		const DB='encuestas';
-		const SERVER='semicmex1.dyndns.org:27018';		
+	  //const SERVER='semicmex1.dyndns.org:27018';		
+		const SERVER='mongodb://encuestas:27017';
+
 		protected $db;
 
 		function __construct() 
