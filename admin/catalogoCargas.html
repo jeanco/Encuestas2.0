@@ -5,9 +5,7 @@
     <title>Catalogo Cargas</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/dataTables.bootstrap.css">    
-    <script src="../js/jquery.min.js" type="text/javascript"></script>
-    <script src="../js/jquery.dataTables.js" type="text/javascript"></script>   
-    <script src="../js/dataTables.bootstrap.js" type="text/javascript" ></script>
+    <link href="../css/dataTables.tableTools.css" rel="stylesheet"> 
     <style type="text/css" media="screen">
     input{
     text-transform: uppercase;
@@ -33,7 +31,10 @@
 	 	 </div>
 	 </div>
  </div>
-
+<script src="../js/jquery.min.js" type="text/javascript"></script>
+<script src="../js/jquery.dataTables.js" type="text/javascript"></script>   
+<script src="../js/dataTables.bootstrap.js" type="text/javascript" ></script>
+<script src="../js/dataTables.tableTools.js" type="text/javascript" ></script>   
 <script type="text/javascript">
 
     $('#cargas').dataTable( {
@@ -69,7 +70,27 @@
         ],
        "language": {
                 "url": "../js/Spanish.json"
-            }
+         },
+		stateSave: true,
+        "dom": 'T<"clear">lfrtip',
+        "tableTools": {
+            "sSwfPath": "../img/swf/copy_csv_xls.swf",
+           "aButtons": [ 
+                {
+                    "sExtends": "print",
+                    "sButtonText": "Imprimir",
+                    "sInfo": "<p> <h2> Vista de impresión </h2></p> <p>Por favor, utilice la función de impresión de su navegador para imprimir esta tabla. Pulse Escape cuando haya terminado.</p>"
+                },
+                {
+                    "sExtends": "copy",
+                    "sButtonText": "Copiar"
+                },
+                {
+                    "sExtends": "csv",
+                    "sButtonText": "CSV"
+                }
+            ]
+        }  
      } );
 
       function confirmDelete() {

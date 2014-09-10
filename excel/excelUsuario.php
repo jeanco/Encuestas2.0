@@ -3,7 +3,14 @@
  ini_set("memory_limit","1000M");
  set_time_limit(20*60);
 
+if( !isset($_GET['ini']) || !isset($_GET['fin']) ){
+ //echo "no definida";
  $consulta = array('capturista'=>$_GET['capturista'], "rubro"=>$_GET['rubro']);
+}else{
+//echo "definida";
+ $consulta = array('fechaCaptura'=>array('$gt'=>new MongoDate(strtotime($_GET['ini'])), '$lte'=>new MongoDate(strtotime($_GET['fin']) )), 'capturista'=>$_GET['capturista'],'rubro'=>$_GET['rubro']);
+}
+
  $skip = (int)$_GET['skip'];
  $limit =(int)$_GET['limit'];
 

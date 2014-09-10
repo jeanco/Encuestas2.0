@@ -3,7 +3,13 @@
  ini_set("memory_limit","1000M");
  set_time_limit(20*60);
 
+if( !isset($_GET['ini']) || !isset($_GET['fin']) ){
+ //echo "no definida";
  $consulta = array('idEstacion'=>$_GET['idEstacion'], "rubro"=>$_GET['rubro']);
+}else{
+//echo "definida";
+ $consulta = array('fechaCaptura'=>array('$gt'=>new MongoDate(strtotime($_GET['ini'])), '$lte'=>new MongoDate(strtotime($_GET['fin']) )), 'idEstacion'=>$_GET['idEstacion'],'rubro'=>$_GET['rubro']);
+}
 
  $skip = (int)$_GET['skip'];
  $limit =(int)$_GET['limit'];
@@ -223,7 +229,7 @@ if ($_GET['rubro'] === 'pds1') {
 	$objPHPExcel->getActiveSheet()->getStyle('A1:AT1')->applyFromArray($decoracionTitulos);
 
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-	header('Content-Disposition: attachment;filename="'.$nombreEstacion['estacion'].'-PD.xlsx"');
+	header('Content-Disposition: attachment;filename="'.$nombreEstacion['carretera'].'-'.$nombreEstacion['estacion'].'-PD.xlsx" ');
 	header('Cache-Control: max-age=0');
 
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
@@ -391,7 +397,7 @@ if ($_GET['rubro'] === 'pds1') {
 	$objPHPExcel->getActiveSheet()->getStyle('A1:AI1')->applyFromArray($decoracionTitulos);
 
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-	header('Content-Disposition: attachment;filename="'.$nombreEstacion['estacion'].'-ODS.xlsx"');
+	header('Content-Disposition: attachment;filename="'.$nombreEstacion['carretera'].'-'.$nombreEstacion['estacion'].'-ODS.xlsx" ');
 	header('Cache-Control: max-age=0');
 
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');

@@ -31,9 +31,21 @@ class Reporte extends Admin
 
     function getEstacion($id)
     {   
-        return $this->db->paquetes->findOne(array('_id' => new MongoId($id)), array('estacion'));
+        return $this->db->paquetes->findOne(array('_id' => new MongoId($id)), array('carretera','estacion'));
     }
 
+
+    function getInicioDia($fecha)
+    {        
+       $date = str_replace('/', '-', $fecha);
+       return  $fechaEspecifica = date('Y-m-d 00:00:00', strtotime($date));
+    }
+
+    function getFinDia($fecha)
+    {        
+       $date = str_replace('/', '-', $fecha);
+       return  $fechaEspecifica = date('Y-m-d 23:00:00', strtotime($date));
+    }
 
 }
 
