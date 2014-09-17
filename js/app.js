@@ -69,11 +69,17 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 			saveData.tipoVehiculo = item.value;
 			activeFields(item.value[0]);			
 			return;
-		}
+		}		
 		
-			saveData[name] = item.label;	
-			name = name.charAt(0).toUpperCase() + name.slice(1);						
-			saveData['clv'+name] = item.value;									
+		saveData[name] = item.label;	
+		name = name.charAt(0).toUpperCase() + name.slice(1);						
+		saveData['clv'+name] = item.value;	
+
+
+		//change value to locaton on poblacion field
+		/*if(name == "PoblacionOrigen" || name == "PoblacionDestino"){
+			saveData['clv'+name] = item.locacion;
+		}*/						
 	};
 
 	function clear(){
@@ -99,8 +105,11 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 		if(typeof objPoblacion == "object"){
 		poblacionOrigen.val(objPoblacion.label);
 		estadoOrigen.val(objPoblacion.desc_estado);
-
 		savePds(poblacionOrigen,objPoblacion);
+		
+		//save id Inegi
+		saveData.poblacionOrigenIdInegi = objPoblacion.idInegi;
+
 		saveData.estadoOrigen = objPoblacion.desc_estado;
 		saveData.clvEstadoOrigen = objPoblacion.id_estado;
 		nexField(estadoOrigen);
@@ -108,7 +117,11 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 			for (var i = 0; i < poblaciones.length; i++) {
 				if(poblaciones[i].value == objPoblacion.toUpperCase()){
 					console.log("poblaciones[i]",poblaciones[i]);
-					savePds(poblacionOrigen,poblaciones[i]);
+					savePds(poblacionOrigen,poblaciones[i]);	
+					
+					//save id Inegi
+					saveData.poblacionOrigenIdInegi = poblaciones[i].idInegi;
+
 					saveData.estadoOrigen = poblaciones[i].desc_estado;
 					saveData.clvEstadoOrigen = poblaciones[i].id_estado;
 					nexField(estadoOrigen);
@@ -127,16 +140,23 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 		if(typeof objPoblacion == "object"){
 			poblacionDestino.val(objPoblacion.label);
 			estadoDestino.val(objPoblacion.desc_estado);
-
 			savePds(poblacionDestino,objPoblacion);
+			
+			//save id Inegi
+			saveData.poblacionDestinoIdInegi = objPoblacion.idInegi;
+
 			saveData.estadoDestino = objPoblacion.desc_estado;
 			saveData.clvEstadoDestino = objPoblacion.id_estado;
-			nexField(poblacionDestino);
+			nexField(estadoDestino);
 		}else if(typeof objPoblacion == "string"){
 			for (var i = 0; i < poblaciones.length; i++) {
 				if(poblaciones[i].value == objPoblacion.toUpperCase()){
 					
 					savePds(poblacionDestino,poblaciones[i]);
+					
+					//save id Inegi
+					saveData.poblacionDestinoIdInegi = poblaciones[i].idInegi;
+
 					saveData.estadoDestino = poblaciones[i].desc_estado;
 					saveData.clvEstadoDestino = poblaciones[i].id_estado;
 					nexField(estadoDestino);
@@ -216,6 +236,48 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 		return true;		
 	}
 
+	var logs = {
+		panel : $('.logs').find('code'),
+		text : "",
+		btnClear : $('.logs').find('button'),
+		init : function(){					
+			this.event();
+			this.start();
+		},
+		event : function(){
+			var _this = this;
+			this.btnClear.click(function(event) {
+				_this.clear();
+			});
+		},
+		start : function(){	
+			var currentdate = new Date(),
+				time = currentdate.getHours() + ":"+ currentdate.getMinutes();
+
+			this.add("Inicio de captura: "+time);
+			this.add("Capturista: "+saveData.capturista);
+		},
+		add : function(t){
+			this.panel.html(t+"<br>"+this.text);
+			this.text = this.panel.html();	
+		},
+		link : function(data){
+			var date = new Date(data.fechaCaptura.sec*1000),				          
+                hours = date.getHours(),
+                minutes = date.getMinutes(),
+                seconds = date.getSeconds(),
+                d = 'encuesta - '+hours+':'+minutes+':'+seconds;
+
+			this.add('<a target="_blank" href="edit.php?id='+data._id.$id+'">'+d+'</a>');	
+		},
+		clear : function(){
+			this.panel.html('');
+			this.text = "";
+		}
+	};
+
+	logs.init();
+
 	//save buttons 
 	$('#pdsGuardar').click(function(event) {
 		saveData.rubro = "pds1";
@@ -236,12 +298,15 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 						//alert("La encuesta se guardo correctamente...");
 						$('.encuestaForm').effect( "highlight",{color:'#dff0d8',border:'#d6e9c6'},2000);
 						clear();
+						logs.link(response.encuesta.encuesta);
+						logs.add('Encuesta guardada ...');
 						$('[name="hora"]').focus();
 					}else{
 						alert("No se pudo guardar la encuesta, intentelo de nuevo.");
 						$('.encuestaForm').effect( "highlight",{color:'#f2dede',border:'#d6e9c6'},2000);
 					}	
 				}catch(e){
+					logs.add('Error al guardar ...');
 					console.log("error",e);
 					$("#errorAlert").modal("show");
 				}				
@@ -272,12 +337,15 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 						//alert("La encuesta se guardo correctamente...");
 						$('.encuestaForm').effect( "highlight",{color:'#dff0d8',border:'#d6e9c6'},2000);
 						clear();
+						logs.link(response.encuesta.encuesta);
+						logs.add('Encuesta guardada ...');
 						$('[name="hora"]').focus();
 					}else{
 						alert("No se pudo guardar la encuesta, intentelo de nuevo.");
 						$('.encuestaForm').effect( "highlight",{color:'#f2dede',border:'#d6e9c6'},2000);
 					}
 				}catch(e){
+					logs.add('Error al guardar ...');
 					console.log("error",e);
 					$("#errorAlert").modal("show");
 				}	
@@ -294,6 +362,8 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 			if(fields[currentField+1] != undefined){
 				fields[currentField+1].focus();
 			}
+
+		c.effect( "highlight",{color:'#d6e9c6'},1500);	
      };
 
 	//show list
@@ -345,6 +415,36 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 		            select: seleccion
 		        })
 			 	.data("ui-autocomplete")._renderItem = dropDown;
+
+			 //sear colonias by name and municipio
+			if(index == "colonias"){
+				$(a).autocomplete({source:function(request, response){
+						var value = request.term.toUpperCase(),
+			 				result = new Array(),
+			 				col = value.split(", ")[0] || value,
+			 				mun = value.split(", ")[1] || value,
+			 				isMun = (value.search(',') != -1)? true : false;			 				 				
+
+			 			for (var i = 0; i < source.length; i++) {
+			 					var item = source[i];
+			 					if(!isMun){
+			 						if(item.label.search(col) != -1){
+				 						result.push(item);
+				 					}	
+			 					}else{
+			 						if((item.label.search(col) != -1) && (item.municipio.search(mun) != -1)){
+				 						result.push(item);
+				 					}
+			 					}			 					
+			 				}
+			 										
+						response(result);
+					}
+				});				
+			} 	
+			/// end	
+			 	
+
 			 $(a).keypress(function(event) {
 			 	var keyCode = event.keyCode || window.event.keyCode,
 			 		value = $(this).val().toUpperCase();
