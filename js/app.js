@@ -69,11 +69,17 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 			saveData.tipoVehiculo = item.value;
 			activeFields(item.value[0]);			
 			return;
-		}
+		}		
 		
-			saveData[name] = item.label;	
-			name = name.charAt(0).toUpperCase() + name.slice(1);						
-			saveData['clv'+name] = item.value;									
+		saveData[name] = item.label;	
+		name = name.charAt(0).toUpperCase() + name.slice(1);						
+		saveData['clv'+name] = item.value;	
+
+
+		//change value to locaton on poblacion field
+		/*if(name == "PoblacionOrigen" || name == "PoblacionDestino"){
+			saveData['clv'+name] = item.locacion;
+		}*/						
 	};
 
 	function clear(){
@@ -99,8 +105,11 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 		if(typeof objPoblacion == "object"){
 		poblacionOrigen.val(objPoblacion.label);
 		estadoOrigen.val(objPoblacion.desc_estado);
-
 		savePds(poblacionOrigen,objPoblacion);
+		
+		//save id Inegi
+		saveData.poblacionOrigenIdInegi = objPoblacion.idInegi;
+
 		saveData.estadoOrigen = objPoblacion.desc_estado;
 		saveData.clvEstadoOrigen = objPoblacion.id_estado;
 		nexField(estadoOrigen);
@@ -108,7 +117,11 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 			for (var i = 0; i < poblaciones.length; i++) {
 				if(poblaciones[i].value == objPoblacion.toUpperCase()){
 					console.log("poblaciones[i]",poblaciones[i]);
-					savePds(poblacionOrigen,poblaciones[i]);
+					savePds(poblacionOrigen,poblaciones[i]);	
+					
+					//save id Inegi
+					saveData.poblacionOrigenIdInegi = poblaciones[i].idInegi;
+
 					saveData.estadoOrigen = poblaciones[i].desc_estado;
 					saveData.clvEstadoOrigen = poblaciones[i].id_estado;
 					nexField(estadoOrigen);
@@ -127,8 +140,11 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 		if(typeof objPoblacion == "object"){
 			poblacionDestino.val(objPoblacion.label);
 			estadoDestino.val(objPoblacion.desc_estado);
-
 			savePds(poblacionDestino,objPoblacion);
+			
+			//save id Inegi
+			saveData.poblacionDestinoIdInegi = objPoblacion.idInegi;
+
 			saveData.estadoDestino = objPoblacion.desc_estado;
 			saveData.clvEstadoDestino = objPoblacion.id_estado;
 			nexField(estadoDestino);
@@ -137,6 +153,10 @@ var poblacionOrigen = $('[name = "poblacionOrigen"]');
 				if(poblaciones[i].value == objPoblacion.toUpperCase()){
 					
 					savePds(poblacionDestino,poblaciones[i]);
+					
+					//save id Inegi
+					saveData.poblacionDestinoIdInegi = poblaciones[i].idInegi;
+
 					saveData.estadoDestino = poblaciones[i].desc_estado;
 					saveData.clvEstadoDestino = poblaciones[i].id_estado;
 					nexField(estadoDestino);
