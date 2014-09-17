@@ -85,6 +85,8 @@
 }
 
 .ui-autocomplete{
+
 	max-height: 400px;
+
 	overflow: overlay;
 }

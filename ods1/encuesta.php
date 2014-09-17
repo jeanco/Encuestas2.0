@@ -326,6 +326,23 @@ else{
 	echo json_encode($status);
 	$insertar=0;}
 
+/*
+//clave poblaciones inegi
+if (array_key_exists('poblacionOrigenIdInegi', $datos)) {
+}
+else{    
+	$status=array("poblacionOrigenIdInegi"=>0);
+	echo json_encode($status);
+	$insertar=0;}
+
+//clave poblaciones inegi
+if (array_key_exists('poblacionDestinoIdInegi', $datos)) {
+}
+else{    
+	$status=array("poblacionDestinoIdInegi"=>0);
+	echo json_encode($status);
+	$insertar=0;}
+*/
 
 //INSERTAR PREFERENCIAS DECLARADAS
 if ($insertar!=0)
@@ -357,14 +374,15 @@ $encuesta=array(
 	
 	'tipoVehiculo'=>$datos['tipoVehiculo'],
 	'descVehiculo'=>$datos['descVehiculo'],
-	
+
+
 	'clvPoblacionOrigen'=>$datos['clvPoblacionOrigen'],
 	'poblacionOrigen'=>$datos['poblacionOrigen'],
 	'clvEstadoOrigen'=>$datos['clvEstadoOrigen'],
 	'estadoOrigen'=>$datos['estadoOrigen'],
 	'coloniaOrigen'=>$datos['coloniaOrigen'],
 	'clvColoniaOrigen'=>$datos['clvColoniaOrigen'],//
-	
+
 	'clvPoblacionDestino'=>$datos['clvPoblacionDestino'],
 	'poblacionDestino'=>$datos['poblacionDestino'],
 	'clvEstadoDestino'=>$datos['clvEstadoDestino'],
@@ -407,6 +425,15 @@ $encuesta=array(
 
 }
 
+//clave poblacion inegi
+if(isset($datos['poblacionDestinoIdInegi'])){
+	$encuesta['poblacionDestinoIdInegi'] = $datos['poblacionDestinoIdInegi'];	
+}
+
+//clave poblacion inegi
+if(isset($datos['poblacionOrigenIdInegi'])){
+	$encuesta['poblacionOrigenIdInegi'] = $datos['poblacionOrigenIdInegi'];	
+}
 
 //ficticio
 /*

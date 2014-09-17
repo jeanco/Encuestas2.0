@@ -395,6 +395,27 @@ else{
 	$status=array("capturista"=>0);
 	echo json_encode($status);
 	$insertar=0;}
+
+
+/*
+//clave poblaciones inegi
+if (array_key_exists('poblacionOrigenIdInegi', $datos)) {
+}
+else{    
+	$status=array("poblacionOrigenIdInegi"=>0);
+	echo json_encode($status);
+	$insertar=0;}
+
+//clave poblaciones inegi
+if (array_key_exists('poblacionDestinoIdInegi', $datos)) {
+}
+else{    
+	$status=array("poblacionDestinoIdInegi"=>0);
+	echo json_encode($status);
+	$insertar=0;}
+*/
+
+
 /*
 if (array_key_exists('id', $datos)) {
 }
@@ -434,15 +455,15 @@ $encuesta=array(
 	'clvHora'=>(int)$datos['clvHora'],
 	
 	'tipoVehiculo'=>$datos['tipoVehiculo'],
-	'descVehiculo'=>$datos['descVehiculo'],
-	
+	'descVehiculo'=>$datos['descVehiculo'],	
+
 	'clvPoblacionOrigen'=>(int)$datos['clvPoblacionOrigen'],
 	'poblacionOrigen'=>$datos['poblacionOrigen'],
 	'clvEstadoOrigen'=>(int)$datos['clvEstadoOrigen'],
 	'estadoOrigen'=>$datos['estadoOrigen'],
 	'coloniaOrigen'=>$datos['coloniaOrigen'],
-	'clvColoniaOrigen'=>$datos['clvColoniaOrigen'],//
-	
+	'clvColoniaOrigen'=>$datos['clvColoniaOrigen'],//	
+
 	'clvPoblacionDestino'=>(int)$datos['clvPoblacionDestino'],
 	'poblacionDestino'=>$datos['poblacionDestino'],
 	'clvEstadoDestino'=>$datos['clvEstadoDestino'],
@@ -515,6 +536,16 @@ $encuesta=array(
 	'fechaCaptura'=> new mongoDate(((int)$datos['fechaCaptura']['sec']))
 	);
 
+}
+
+//clave poblacion inegi
+if(isset($datos['poblacionDestinoIdInegi'])){
+	$encuesta['poblacionDestinoIdInegi'] = $datos['poblacionDestinoIdInegi'];	
+}
+
+//clave poblacion inegi
+if(isset($datos['poblacionOrigenIdInegi'])){
+	$encuesta['poblacionOrigenIdInegi'] = $datos['poblacionOrigenIdInegi'];	
 }
 /*
 //ficticio

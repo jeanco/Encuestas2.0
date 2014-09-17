@@ -34,7 +34,7 @@
 
     <div class="col-md-4">
         <button class="btn btn-default btn-sm" id="editMonitorEncuesta">Edit</button>
-        <div id="showDetallesEncuesta"></div>       
+        <div id="showDetallesEncuesta"></div>	  	
     </div>
     
 </div>
