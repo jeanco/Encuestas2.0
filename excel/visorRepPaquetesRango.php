@@ -3,7 +3,13 @@
  $client = new Reporte();
  //var_dump($_GET);
  $paquete = $_GET;
- $count = $client->countEncuestas($_GET);
+ $fechaEspecificai = $client->getInicioDia($paquete['ini']);
+ $fechaEspecificaf = $client->getFinDia($paquete['fin']);
+
+ $consulta = array('fechaCaptura'=> array( '$gt'=>new MongoDate(strtotime($fechaEspecificai)),'$lte'=>new MongoDate(strtotime($fechaEspecificaf)) ), 'idEstacion'=>$paquete['idEstacion'],'rubro'=>$paquete['rubro']);
+ $count = $client->countEncuestas($consulta);
+
+ //var_dump($count);
  if ($count == 0 || $count == null) {
  ?>
 	<p><span> <span class="glyphicon glyphicon-warning-sign" style="font-size:16px;"></span>   No existen registros para generar descarga. </span></p>
@@ -27,6 +33,8 @@
 	var totalRegistros = parseInt("<?php echo $count; ?>"); 
 	var paquete = "<?php echo $paquete['idEstacion']; ?>";
 	var rubro = "<?php echo $paquete['rubro']; ?>";
+	var ini = "<?php echo $fechaEspecificai; ?>"; 
+    var fin = "<?php echo $fechaEspecificaf; ?>";		
 	var reportes=[];
 	var vuelta = 0;
 
@@ -44,12 +52,12 @@
 
 	var table = $('#reportesPaquetes');
 	for (var i = 0; i<reportes.length; i++) {
-		var tr = $('<tr><td>'+(i+1)+'</td><td>Reporte</td></tr>');
+		var tr = $('<tr><td>'+(i+1)+'</td><td>Reporte </td></tr>');
 		var td = $('<td></td>');
-		var button = $('<button data-skip="'+reportes[i].skip+'" data-limit="'+reportes[i].limit+'"  class="btn btn-success">Descargar <span class="glyphicon glyphicon-download" ></span></button>');	
+		var button = $('<button data-skip="'+reportes[i].skip+'" data-limit="'+reportes[i].limit+'" class="btn btn-success">Descargar <span class="glyphicon glyphicon-download" ></span></button>');	
 		$( button ).on( "click", function() {
 			event.preventDefault();
-	        window.open("../excel/excelPaquetes.php?idEstacion="+paquete+"&rubro="+rubro+"&skip="+$( this ).data('skip') +"&limit="+$( this ).data('limit') , "_blank");          
+	        window.open("../excel/excelPaquetes.php?idEstacion="+ paquete+"&rubro="+rubro+"&skip="+$( this ).data('skip') +"&limit="+$( this ).data('limit')+"&ini="+ini+"&fin="+fin , "_blank");          
 		});
 		tr.append(td);
 		td.append(button);
