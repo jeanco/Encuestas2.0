@@ -67,13 +67,14 @@ class Admin extends ConexionMongodb
     function tablaCiudades()
     {
       $tablaCiudades = array_map(function($ciudad){
-      return  "<tr><td>".$ciudad['value']."</td>
+		 return "<tr><td>".$ciudad['idInegi']." </td>
+      			   <td>".$ciudad['value']."</td>
       			   <td>".$ciudad['label']."</td>
       			   <td>".$ciudad['desc_estado']."</td>
       			   <td>".$ciudad['id_estado']."</td>
       			   <td>".$ciudad['locacion']."</td>
-      			   <td><a onclick=' return confirmarEliminacion();' href='../includes/eliminarCiudad.php?_id=".$ciudad['_id']."&u=adm' title='Eliminar ciudad'><span class='glyphicon glyphicon-trash'></span></a></td></tr>";
-             }, $this->listaCiudades());
+      			   <td><a onclick=' return confirmarEliminacion();' href='../includes/eliminarCiudad.php?_id=".$ciudad['_id']."&u=adm' title='Eliminar ciudad'><span class='glyphicon glyphicon-trash'></span></a></td></tr>";      	   	
+           }, $this->listaCiudades());
       return implode($tablaCiudades);
       
     }
@@ -258,7 +259,7 @@ class Admin extends ConexionMongodb
 	function mapListaPaquetes()
 	{
 		$opciones = array_map(function($paquete){			
-         		      return "<option value='".$paquete['_id']."' data-estacion='".$paquete['estacion']."' >".$paquete['estacion']."</option>";   
+         		      return "<option value='".$paquete['_id']."' >".$paquete['estacion']."</option>";   
             		}, 
             		$this->listaPaquetes());
 		return implode($opciones);

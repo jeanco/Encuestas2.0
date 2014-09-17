@@ -3,7 +3,14 @@
  ini_set("memory_limit","1000M");
  set_time_limit(20*60);
 
+if( !isset($_GET['ini']) || !isset($_GET['fin']) ){
+ //echo "no definida";
  $consulta = array('idEstacion'=>$_GET['idEstacion'], "rubro"=>$_GET['rubro']);
+}else{
+//echo "definida";
+ $consulta = array('fechaCaptura'=>array('$gt'=>new MongoDate(strtotime($_GET['ini'])), '$lte'=>new MongoDate(strtotime($_GET['fin']) )), 'idEstacion'=>$_GET['idEstacion'],'rubro'=>$_GET['rubro']);
+}
+
  $skip = (int)$_GET['skip'];
  $limit =(int)$_GET['limit'];
 
@@ -12,6 +19,7 @@
  include('reportes.php');
 
  $client = new Reporte();
+ $nombreEstacion =  $client->getEstacion($_GET['idEstacion']);
 
  /** Error reporting */
  error_reporting(E_ALL);
@@ -111,13 +119,13 @@ if ($_GET['rubro'] === 'pds1') {
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('I'.(string)($i), (string)$fila['tipoVehiculo']);// tipoVehiculo
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('J'.(string)($i), (string)$fila['descVehiculo']);// desc vehiculo
 
-			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('K'.(string)($i), (string)$fila['clvPoblacionOrigen']);// clave pob. origen
+			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('K'.(string)($i), (string)$fila['poblacionOrigenIdInegi']);// clave pob. origen
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('L'.(string)($i), (string)$fila['poblacionOrigen']);// Pob. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('M'.(string)($i), (string)$fila['clvEstadoOrigen']);// clave edo. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('N'.(string)($i), (string)$fila['estadoOrigen']);// edo. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('O'.(string)($i), (string)$fila['coloniaOrigen']);// colonia origen 
 
-			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('P'.(string)($i), (string)$fila['clvPoblacionDestino']);// clave pob. destino
+			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('P'.(string)($i), (string)$fila['poblacionDestinoIdInegi']);// clave pob. destino
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('Q'.(string)($i), (string)$fila['poblacionDestino']);// Pob. destino 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('R'.(string)($i), (string)$fila['clvEstadoDestino']);// clave edo. destino 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('S'.(string)($i), (string)$fila['estadoDestino']);// edo. destino 
@@ -218,10 +226,10 @@ if ($_GET['rubro'] === 'pds1') {
 					);		
 
 
-	$objPHPExcel->getActiveSheet()->getStyle('A1:AU1')->applyFromArray($decoracionTitulos);
+	$objPHPExcel->getActiveSheet()->getStyle('A1:AT1')->applyFromArray($decoracionTitulos);
 
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-	header('Content-Disposition: attachment;filename="'.$_GET['estacion'].'-PD.xlsx"');
+	header('Content-Disposition: attachment;filename="'.$nombreEstacion['carretera'].'-'.$nombreEstacion['estacion'].'-PD.xlsx" ');
 	header('Cache-Control: max-age=0');
 
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
@@ -303,13 +311,13 @@ if ($_GET['rubro'] === 'pds1') {
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('I'.(string)($i), (string)$fila['tipoVehiculo']);// tipoVehiculo
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('J'.(string)($i), (string)$fila['descVehiculo']);// desc vehiculo
 
-			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('K'.(string)($i), (string)$fila['clvPoblacionOrigen']);// clave pob. origen
+			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('K'.(string)($i), (string)$fila['poblacionOrigenIdInegi']);// clave pob. origen
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('L'.(string)($i), (string)$fila['poblacionOrigen']);// Pob. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('M'.(string)($i), (string)$fila['clvEstadoOrigen']);// clave edo. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('N'.(string)($i), (string)$fila['estadoOrigen']);// edo. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('O'.(string)($i), (string)$fila['coloniaOrigen']);// colonia origen 
 
-			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('P'.(string)($i), (string)$fila['clvPoblacionDestino']);// clave pob. destino
+			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('P'.(string)($i), (string)$fila['poblacionDestinoIdInegi']);// clave pob. destino
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('Q'.(string)($i), (string)$fila['poblacionDestino']);// Pob. destino 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('R'.(string)($i), (string)$fila['clvEstadoDestino']);// clave edo. destino 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('S'.(string)($i), (string)$fila['estadoDestino']);// edo. destino 
@@ -389,7 +397,7 @@ if ($_GET['rubro'] === 'pds1') {
 	$objPHPExcel->getActiveSheet()->getStyle('A1:AI1')->applyFromArray($decoracionTitulos);
 
 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-	header('Content-Disposition: attachment;filename="'.$_GET['estacion'].'-ODS.xlsx"');
+	header('Content-Disposition: attachment;filename="'.$nombreEstacion['carretera'].'-'.$nombreEstacion['estacion'].'-ODS.xlsx" ');
 	header('Cache-Control: max-age=0');
 
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
