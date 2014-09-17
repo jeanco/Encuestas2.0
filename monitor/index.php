@@ -31,10 +31,12 @@
 			<tbody id="tbody"></tbody>
 		</table>
 	</div>
-    <button class="btn btn-default btn-sm" id="editMonitorEncuesta">Edit</button>
-	<div class="col-md-4" id="showDetallesEncuesta">
-		
-	</div>
+
+    <div class="col-md-4">
+        <button class="btn btn-default btn-sm" id="editMonitorEncuesta">Edit</button>
+        <div id="showDetallesEncuesta"></div>       
+    </div>
+    
 </div>
  <script src="../js/jquery.min.js"></script>
 <script type="text/javascript">
