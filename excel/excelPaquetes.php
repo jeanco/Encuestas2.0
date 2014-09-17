@@ -119,13 +119,13 @@ if ($_GET['rubro'] === 'pds1') {
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('I'.(string)($i), (string)$fila['tipoVehiculo']);// tipoVehiculo
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('J'.(string)($i), (string)$fila['descVehiculo']);// desc vehiculo
 
-			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('K'.(string)($i), (string)$fila['clvPoblacionOrigen']);// clave pob. origen
+			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('K'.(string)($i), (string)$fila['poblacionOrigenIdInegi']);// clave pob. origen
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('L'.(string)($i), (string)$fila['poblacionOrigen']);// Pob. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('M'.(string)($i), (string)$fila['clvEstadoOrigen']);// clave edo. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('N'.(string)($i), (string)$fila['estadoOrigen']);// edo. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('O'.(string)($i), (string)$fila['coloniaOrigen']);// colonia origen 
 
-			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('P'.(string)($i), (string)$fila['clvPoblacionDestino']);// clave pob. destino
+			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('P'.(string)($i), (string)$fila['poblacionDestinoIdInegi']);// clave pob. destino
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('Q'.(string)($i), (string)$fila['poblacionDestino']);// Pob. destino 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('R'.(string)($i), (string)$fila['clvEstadoDestino']);// clave edo. destino 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('S'.(string)($i), (string)$fila['estadoDestino']);// edo. destino 
@@ -311,13 +311,13 @@ if ($_GET['rubro'] === 'pds1') {
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('I'.(string)($i), (string)$fila['tipoVehiculo']);// tipoVehiculo
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('J'.(string)($i), (string)$fila['descVehiculo']);// desc vehiculo
 
-			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('K'.(string)($i), (string)$fila['clvPoblacionOrigen']);// clave pob. origen
+			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('K'.(string)($i), (string)$fila['poblacionOrigenIdInegi']);// clave pob. origen
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('L'.(string)($i), (string)$fila['poblacionOrigen']);// Pob. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('M'.(string)($i), (string)$fila['clvEstadoOrigen']);// clave edo. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('N'.(string)($i), (string)$fila['estadoOrigen']);// edo. origen 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('O'.(string)($i), (string)$fila['coloniaOrigen']);// colonia origen 
 
-			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('P'.(string)($i), (string)$fila['clvPoblacionDestino']);// clave pob. destino
+			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('P'.(string)($i), (string)$fila['poblacionDestinoIdInegi']);// clave pob. destino
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('Q'.(string)($i), (string)$fila['poblacionDestino']);// Pob. destino 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('R'.(string)($i), (string)$fila['clvEstadoDestino']);// clave edo. destino 
 			$objPHPExcel->setActiveSheetIndex(0) ->setCellValue('S'.(string)($i), (string)$fila['estadoDestino']);// edo. destino 

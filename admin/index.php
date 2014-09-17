@@ -22,7 +22,7 @@ $client = new Admin();
   </head>
 <body>   
  <div class="container">
-   <p><h1 class="center">Operaciones administrativas</h1></p>
+   <p><h1 class="center">Opciones administrativas</h1></p>
     <div class="row col-md-12 col-lg-12" >
          <div class=" col-lg-2" style="float:right;">
            <a href="../seguridad/sesiones/cerrarSesion.php">Cerrar Sesión</a>
@@ -312,32 +312,33 @@ $client = new Admin();
 
                    <div class="tab-pane" id="c"><!--  tab agregar capturistas-->
                       <p>&nbsp;</p>
-                       <div class="row col-md-4 col-lg-4 ">
+                       <div class="row col-md-9 col-lg-9 ">
                           <span>Proporcione los datos necesarios para agregar capturista:</span>
                            <p>&nbsp;</p>
                                <form id="agregarUsuario">
                                    <div id="msjMayus" ></div>                     
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-6">
                                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-6">
                                        <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-6">
                                         <input type="password" class="form-control" id="contrasenya" name="contrasenya" placeholder="Contraseña" onkeypress="capaoculta(event);" required>
                                      </div>
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-6">
                                        <select class="form-control" name="tipo" required>
-                                       <option selected>Selecciones Tipo usuario</option>
-                                       <option>capturista</option>
-                                       <option>administrador</option>
+                                         <option selected>Selecciones Tipo usuario</option>
+                                         <option>capturista</option>
+                                         <option>administrador</option>
                                        </select><br>  
                                     </div>
-                                     <button type="submit" id="btn_agregarUsuario" class="btn btn-primary">Crear Nuevo</button> 
+                                     <div align="right"><button type="submit" id="btn_agregarUsuario" class="btn btn-primary">Crear Nuevo</button></div> 
                                </form>
                         </div>
-                        <div class="row col-md-4 col-lg-4 col-lg-offset-1">  
-                         <h2>Usuarios registrados: </h2>                              
+                        <div class="row col-md-9 col-lg-9 ">  
+                         <h2>Usuarios registrados: </h2>    
+                            <p>&nbsp;</p>                          
                                 <table class="table table-condensed table-striped">
                                     <tr>
                                       <th>Nombre</th>
@@ -355,22 +356,23 @@ $client = new Admin();
 
                    <div class="tab-pane" id="d"><!--  tab agregar estaciones-->
                       <p>&nbsp;</p>
-                         <div class="row col-md-6 col-lg-6 ">
+                         <div class="row col-md-9 col-lg-9 ">
                           <span>Proporcione los datos necesarios para agregar Estaciones:</span>
                            <p>&nbsp;</p>
                                 <form id="agregarEstaciones">
 
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-4">
                                         <input type="text" class="form-control" id="estacion" name="estacion" placeholder="Estacion" required> </div>
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-4">
                                         <input type="text" class="form-control" id="carretera" name="carretera" placeholder="Carretera" required></div>
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-4">
                                         <input type="text" class="form-control" id="km" name="km" placeholder="Kilometro" required> </div>
-                                    <button type="submit" id="btn_agregarEstaciones" class="btn btn-primary">Crear Nuevo</button>
+                                    <div align="right"><button type="submit" id="btn_agregarEstaciones" class="btn btn-primary">Crear Nuevo</button></div>
                                  </form>
                           </div>            
                           <div class="row col-md-9 col-lg-9 col-lg-offset-0" id ="tablaEstaciones"> 
                           <h2>Estaciones disponibles: </h2>
+                           <p>&nbsp;</p>
                                 <table class="table table-condensed table-striped">
                                     <tr>
                                       <th>ID</th>
@@ -389,32 +391,32 @@ $client = new Admin();
 
                    <div class="tab-pane" id="e"><!--  tab agregar ciudades-->
                      <p>&nbsp;</p>
-                     <div class="row col-md-6 col-lg-6 ">
+                     <div class="row col-md-9 col-lg-9 ">
                       <span>Proporcione los datos necesarios para agregar Ciudades:</span>
                        <p>&nbsp;</p>
                           <form id="agregarCiudad">
-                            <div class="form-group">
+                            <div class="form-group col-lg-4">
                                 <input type="text" class="form-control" id="claveInegi" name="claveInegi" placeholder="Clave INEGI" required>
                              </div>                          
-                            <div class="form-group">
+                            <div class="form-group col-lg-4">
                                 <input type="text" class="form-control" id="clavec" name="clavec" placeholder="Clave ciudad" required>
                              </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-4">
                               <input type="text" class="form-control" id="nombrec" name="nombrec" placeholder="Nombre ciudad" required>
                                    </div>
-                            <div class="form-group ">
+                            <div class="form-group col-lg-4 ">
                               <input type="text" class="form-control" id="descEstado" name="descEstado" placeholder="Estado (abrev)" required>
                                    </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-4">
                               <input type="text" class="form-control" id="idestado" name="idestado" placeholder="Id Estado" required>
                                    </div>
-                            <div class="form-group">
+                            <div class="form-group col-lg-4">
                               <input type="text" class="form-control"  id="locacion" name="locacion" placeholder="Locacion" required>
                                    </div>
-                            <button type="submit" id="btn_agregarCiudad" class="btn btn-primary">Crear Nuevo</button>
+                            <div align="right"><button type="submit" id="btn_agregarCiudad" class="btn btn-primary">Crear Nuevo</button></div>
                            </form>
                       </div>  
-                      <div class="row col-md-9 col-lg-9 col-lg-offset-3">
+                      <div class="row col-md-9 col-lg-9 ">
                       <h2>Ultimos 20 registros</h2>
                       <p align="right">Ver catalogo completo <a href="catalogoCiudades.html" target="_blank" title="Ir Catalogo ciudades" >aqui</a></p>                          
                           <table class="table table-condensed table-striped">
@@ -437,26 +439,26 @@ $client = new Admin();
 
                    <div class="tab-pane" id="f"><p>&nbsp;</p><!--  tab agregar colonia-->
                     
-                     <div class="row col-md-4 col-lg-4 ">
+                     <div class="row col-md-9 col-lg-9 ">
                         <span>Proporcione los datos necesarios para agregar Colonia:</span>
                          <p>&nbsp;</p>
                         <form id="agregarColonia">
-                              <div class="form-group">
+                              <div class="form-group col-lg-6">
                                   <input type="text" class="form-control" id="clavecol" name="clavecol" placeholder="Clave colonia" required>
                                </div>
-                              <div class="form-group">
+                              <div class="form-group col-lg-6">
                                   <input type="text" class="form-control" id="nombrecol" name="nombrecol" placeholder="Nombre colonia" required>
                                </div>
-                              <div class="form-group ">
+                              <div class="form-group col-lg-6 ">
                                   <input type="text" class="form-control" id="municipio" name="municipio" placeholder="Nombre municipio" required>
                                </div>
-                              <div class="form-group">
+                              <div class="form-group col-lg-6">
                                   <input type="text" class="form-control" id="cp" name="cp" placeholder="CP" required>
                                </div>
-                              <button type="submit" id="btn_agregarColonia" class="btn btn-primary">Crear Nuevo</button> 
+                             <div align="right"> <button type="submit" id="btn_agregarColonia" class="btn btn-primary">Crear Nuevo</button> </div>
                           </form>
                        </div>
-                        <div class="row col-md-5 col-lg-5" id="colonias">
+                        <div class="row col-md-9 col-lg-9" id="colonias">
                            <h2>Ultimos 20 registros</h2>
                            <p align="right">Ver catalogo completo <a href="catalogoColonias.html" target="_blank" title="Ir Catalogo ciudades" >aqui</a></p>                            
                               <table class="table table-condensed table-striped">
@@ -475,20 +477,20 @@ $client = new Admin();
 
                    <div class="tab-pane" id="g"><!--  tab agregar marca-->
                       
-                          <div class="row col-md-4 col-lg-4 ">
+                          <div class="row col-md-9 col-lg-9 ">
                             <span>Proporcione los datos necesarios para agregar marcas de auto:</span>
                              <p>&nbsp;</p>
                                 <form id="agregarMarcas">
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-6">
                                       <input type="text" class="form-control" id="clavem" name="clavem" placeholder="Clave marca" required>
                                    </div>
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-6">
                                        <input type="text" class="form-control" id="nombrem" name="nombrem" placeholder="Nombre marca" required>
                                    </div>
-                                    <button type="submit" id="btn_agregarMarcas" class="btn btn-primary">Crear Nuevo</button> 
+                                   <div align="right"> <button type="submit" id="btn_agregarMarcas" class="btn btn-primary">Crear Nuevo</button> </div>
                                 </form>
                             </div>
-                            <div class="row col-md-4 col-lg-4 col-lg-offset-1">
+                            <div class="row col-md-9 col-lg-9 ">
                               <h2>Ultimos 20 registros</h2>
                               <p align="right">Ver catalogo completo <a href="catalogoMarcas.html" target="_blank" title="Ir Catalogo ciudades" >aqui</a></p>
                                  <br>
@@ -505,20 +507,20 @@ $client = new Admin();
 
                     <div class="tab-pane " id="h"><!--  tab agregar carga-->
                         <p>&nbsp;</p>
-                            <div class="row col-md-4 col-lg-4 ">
+                            <div class="row col-md-9 col-lg-9 ">
                               <span>Proporcione los datos necesarios para agregar cargas de auto:</span>
                                <p>&nbsp;</p>
                                   <form id="agregarCarga">
-                                      <div class="form-group">
+                                      <div class="form-group col-lg-6">
                                         <input type="text" class="form-control" id="clavecarga" name="clavecarga"  placeholder="Clave Carga" required>
                                      </div>
-                                      <div class="form-group">
+                                      <div class="form-group col-lg-6">
                                          <input type="text" class="form-control" id="nombrecarga" name="nombrecarga"  placeholder="Nombre Carga" required>
                                      </div> 
-                                       <button type="submit" id="btn_agregarCarga" class="btn btn-primary">Crear Nuevo</button
+                                     <div align="right">  <button type="submit" id="btn_agregarCarga" class="btn btn-primary">Crear Nuevo</button></div>
                                   </form>
                               </div>
-                              <div class="row col-md-4 col-lg-4 col-lg-offset-1">
+                              <div class="row col-md-9 col-lg-9 ">
                                   <h2>Ultimos 20 registros</h2>
                                   <p align="right">Ver catalogo completo <a href="catalogoCargas.html" target="_blank" title="Ir Catalogo ciudades" >aqui</a></p>
 
